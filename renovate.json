@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "minimumReleaseAge": "3 days",
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "description": "Nx is upgraded with `pnpm nx migrate latest`, which also migrates config",
+      "matchPackageNames": ["nx", "@nx/**"],
+      "enabled": false
+    },
+    {
+      "description": "Angular 22 needs TypeScript 6.0.x",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1.0"
+    },
+    {
+      "description": "Playwright npm package and the CI container image must move together",
+      "groupName": "playwright",
+      "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"]
+    },
+    { "groupName": "storybook", "matchPackageNames": ["storybook", "@storybook/**"] },
+    { "groupName": "angular", "matchPackageNames": ["@angular/**", "ng-packagr"] },
+    { "groupName": "stencil", "matchPackageNames": ["@stencil/**"] },
+    { "groupName": "vitest", "matchPackageNames": ["vitest", "@vitest/**"] },
+    {
+      "groupName": "lint",
+      "matchPackageNames": [
+        "eslint",
+        "@eslint/**",
+        "typescript-eslint",
+        "@typescript-eslint/**",
+        "stylelint",
+        "stylelint-**"
+      ]
+    }
+  ]
+}

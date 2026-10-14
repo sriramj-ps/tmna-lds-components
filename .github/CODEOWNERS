@@ -1,0 +1,14 @@
+# Who must approve changes. Replace YOUR-ORG and the team names with real GitHub teams.
+# The last matching line wins.
+
+*                         @YOUR-ORG/lds-core
+
+# Tokens change both brands at once: design system designers review too
+/packages/tokens/         @YOUR-ORG/lds-core @YOUR-ORG/lds-design
+
+# Build, release and supply-chain settings: platform owners only
+/.github/                 @YOUR-ORG/lds-platform
+/nx.json                  @YOUR-ORG/lds-platform
+/pnpm-workspace.yaml      @YOUR-ORG/lds-platform
+/.npmrc                   @YOUR-ORG/lds-platform
+/AGENTS.md                @YOUR-ORG/lds-platform
