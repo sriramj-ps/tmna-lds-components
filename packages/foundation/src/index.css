@@ -1,0 +1,8 @@
+/*
+ * LDS foundation: the page-level base every site loads once, after the tokens CSS.
+ * Only light-DOM, page-wide rules live here. Component styles live inside each web component.
+ */
+@import './reset.css';
+@import './typography.css';
+@import './focus.css';
+@import './utilities.css';

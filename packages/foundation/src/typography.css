@@ -1,0 +1,14 @@
+/* Base text styles for author-entered rich text (AEM Text component, RTE output). */
+:where(body) {
+  font-family: var(--lds-font-family-body);
+  font-size: var(--lds-font-size-md);
+  font-weight: var(--lds-font-weight-regular);
+}
+
+:where(h1, h2, h3, h4) {
+  font-weight: var(--lds-font-weight-bold);
+}
+
+:where(a) {
+  color: inherit;
+}

@@ -1,0 +1,62 @@
+{
+  "color": {
+    "$description": "Toyota brand mode: semantic tokens that components use. Mirrors the 'Toyota' mode of the Figma variable collection.",
+    "$type": "color",
+    "text": {
+      "default": {
+        "$value": "{palette.neutral.900}"
+      },
+      "subtle": {
+        "$value": "{palette.neutral.700}"
+      },
+      "inverse": {
+        "$value": "{palette.neutral.0}"
+      }
+    },
+    "surface": {
+      "default": {
+        "$value": "{palette.neutral.0}"
+      },
+      "raised": {
+        "$value": "{palette.neutral.100}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{palette.neutral.300}"
+      }
+    },
+    "action": {
+      "primary": {
+        "background": {
+          "$value": "{palette.red.600}"
+        },
+        "background-hover": {
+          "$value": "{palette.red.700}"
+        },
+        "foreground": {
+          "$value": "{palette.neutral.0}"
+        }
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{palette.blue.500}"
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "body": {
+        "$value": ["ToyotaType", "Helvetica Neue", "Arial", "sans-serif"]
+      }
+    }
+  },
+  "shape": {
+    "$type": "dimension",
+    "action-radius": {
+      "$value": "{radius.pill}"
+    }
+  }
+}

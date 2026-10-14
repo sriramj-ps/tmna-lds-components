@@ -27,5 +27,17 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "targetDefaults": {
+    "stylelint": {
+      "command": "stylelint \"{projectRoot}/src/**/*.css\" --allow-empty-input",
+      "cache": true,
+      "inputs": ["default", "{workspaceRoot}/stylelint.config.mjs"],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "cache": true
+    }
+  }
 }

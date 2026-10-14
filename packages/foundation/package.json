@@ -1,0 +1,50 @@
+{
+  "name": "@tmna-cx-design-system/foundation",
+  "version": "0.0.0",
+  "description": "LDS page-level base CSS (reset, typography, focus, utilities). Load after the tokens CSS.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./dist/foundation.css",
+    "./min": "./dist/foundation.min.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
+  },
+  "dependencies": {
+    "@tmna-cx-design-system/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "browserslist": "catalog:",
+    "lightningcss": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:foundation"
+    ],
+    "targets": {
+      "build": {
+        "command": "node build.mjs",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "inputs": [
+          "{projectRoot}/src/**/*",
+          "{projectRoot}/build.mjs"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "cache": true
+      },
+      "stylelint": {}
+    }
+  }
+}

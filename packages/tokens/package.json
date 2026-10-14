@@ -1,0 +1,51 @@
+{
+  "name": "@tmna-cx-design-system/tokens",
+  "version": "0.0.0",
+  "description": "LDS design tokens (Toyota + Lexus brand modes) as CSS variables, JS and JSON",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./dist/css/tokens.css",
+    "./css": "./dist/css/tokens.css",
+    "./css/*.css": "./dist/css/*.css",
+    "./js/*": {
+      "types": "./dist/js/*.d.ts",
+      "default": "./dist/js/*.js"
+    },
+    "./json/*.json": "./dist/json/*.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
+  },
+  "devDependencies": {
+    "style-dictionary": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:tokens"
+    ],
+    "targets": {
+      "build": {
+        "command": "node build.mjs",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "inputs": [
+          "{projectRoot}/src/**/*",
+          "{projectRoot}/build.mjs"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "cache": true
+      }
+    }
+  }
+}

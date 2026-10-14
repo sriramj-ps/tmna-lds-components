@@ -54,6 +54,8 @@ export default {
       'oklab',
       'oklch',
     ],
+    // @import './x.css' (bundled by Lightning CSS)
+    'import-notation': 'string',
     // Our custom-property naming: --lds-<group>-<name>
     'custom-property-pattern': [
       '^(lds|_)[a-z0-9-]*$',

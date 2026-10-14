@@ -34,4 +34,9 @@ export default [
       'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
+  {
+    // Build scripts and tools may log progress
+    files: ['**/build.mjs', '**/scripts/**', 'tools/**'],
+    rules: { 'no-console': 'off' },
+  },
 ];
