@@ -1,0 +1,62 @@
+/* Every value is a token. Brand changes (Toyota pill/red, Lexus square/black) come from the tokens alone. */
+:host {
+  display: inline-block;
+}
+
+:host([disabled]) {
+  pointer-events: none;
+}
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lds-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--lds-shape-action-radius);
+  font-family: var(--lds-font-family-body);
+  font-weight: var(--lds-font-weight-bold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--lds-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.control--primary {
+  background-color: var(--lds-color-action-primary-background);
+  color: var(--lds-color-action-primary-foreground);
+}
+
+.control--primary:hover {
+  background-color: var(--lds-color-action-primary-background-hover);
+}
+
+.control--secondary {
+  background-color: transparent;
+  border-color: var(--lds-color-border-default);
+  color: var(--lds-color-text-default);
+}
+
+.control--sm {
+  padding: var(--lds-space-1) var(--lds-space-3);
+  font-size: var(--lds-font-size-sm);
+}
+
+.control--md {
+  padding: var(--lds-space-2) var(--lds-space-4);
+  font-size: var(--lds-font-size-md);
+}
+
+.control--lg {
+  padding: var(--lds-space-3) var(--lds-space-6);
+  font-size: var(--lds-font-size-lg);
+}
+
+.control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

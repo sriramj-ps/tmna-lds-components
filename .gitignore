@@ -45,3 +45,11 @@ Thumbs.db
 .claude/settings.local.json
 
 .nx/polygraph
+# Stencil build output and generated framework wrappers (rebuilt by `nx build web-components`)
+.stencil
+packages/web-components/loader
+packages/web-components/components
+packages/web-components/www
+packages/*/src/generated
+storybook-static
+*.tsbuildinfo

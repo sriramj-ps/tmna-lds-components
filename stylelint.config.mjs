@@ -54,6 +54,11 @@ export default {
       'oklab',
       'oklch',
     ],
+    // BEM-style classes inside components: block, block__element, block--modifier
+    'selector-class-pattern': [
+      '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',
+      { message: 'Use kebab-case BEM: block, block__element, block--modifier' },
+    ],
     // @import './x.css' (bundled by Lightning CSS)
     'import-notation': 'string',
     // Our custom-property naming: --lds-<group>-<name>

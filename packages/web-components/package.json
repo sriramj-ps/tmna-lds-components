@@ -1,0 +1,112 @@
+{
+  "name": "@tmna-cx-design-system/web-components",
+  "version": "0.0.0",
+  "description": "LDS components as framework-agnostic web components (Stencil). Works in AEM HTL, React and Angular.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "collection": "./dist/collection/collection-manifest.json",
+  "collection:main": "./dist/collection/index.js",
+  "unpkg": "./dist/lds/lds.esm.js",
+  "files": [
+    "dist",
+    "loader",
+    "components"
+  ],
+  "sideEffects": [
+    "./dist/lds/*",
+    "./loader/*",
+    "./components/*.js"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./loader": {
+      "types": "./loader/index.d.ts",
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs.js"
+    },
+    "./components": {
+      "types": "./components/index.d.ts",
+      "import": "./components/index.js"
+    },
+    "./components/*.js": {
+      "types": "./components/*.d.ts",
+      "import": "./components/*.js"
+    },
+    "./components/*": {
+      "types": "./components/*.d.ts",
+      "import": "./components/*.js"
+    },
+    "./docs.json": "./dist/docs.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./package.json": "./package.json"
+  },
+  "customElements": "./dist/custom-elements.json",
+  "publishConfig": {
+    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
+  },
+  "peerDependencies": {
+    "@tmna-cx-design-system/tokens": "workspace:^"
+  },
+  "devDependencies": {
+    "@stencil/angular-output-target": "catalog:",
+    "@stencil/core": "catalog:",
+    "@stencil/react-output-target": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:components",
+      "level:core"
+    ],
+    "targets": {
+      "build": {
+        "command": "stencil build",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/loader",
+          "{projectRoot}/components",
+          "{projectRoot}/src/components.d.ts",
+          "{workspaceRoot}/packages/react/src/generated",
+          "{workspaceRoot}/packages/angular/src/generated"
+        ],
+        "cache": true
+      },
+      "dev": {
+        "command": "stencil build --dev --watch",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "continuous": true
+      },
+      "stylelint": {},
+      "typecheck": {
+        "command": "tsc -p tsconfig.json --noEmit",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": []
+      }
+    }
+  }
+}

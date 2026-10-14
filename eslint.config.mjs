@@ -16,6 +16,8 @@ export default [
       '**/components.d.ts',
       '**/src/generated/**',
       '**/vite.config.*.timestamp*',
+      '**/.stencil',
+      'packages/web-components/components',
     ],
   },
   {
@@ -38,5 +40,12 @@ export default [
     // Build scripts and tools may log progress
     files: ['**/build.mjs', '**/scripts/**', 'tools/**'],
     rules: { 'no-console': 'off' },
+  },
+  {
+    // Stencil JSX: `h` is used by the compiler even though it looks unused
+    files: ['packages/web-components/**/*.tsx'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^(h|Fragment)$' }],
+    },
   },
 ];
