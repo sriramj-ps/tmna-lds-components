@@ -68,7 +68,8 @@
     "projectsRelationship": "fixed",
     "versionPlans": true,
     "version": {
-      "preVersionCommand": "pnpm nx run-many -t build"
+      "preVersionCommand": "pnpm nx run-many -t build",
+      "adjustSemverBumpsForZeroMajorVersion": false
     },
     "changelog": {
       "workspaceChangelog": {
