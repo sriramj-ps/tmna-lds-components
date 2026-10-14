@@ -1,0 +1,31 @@
+# Prepares the environment for the GitHub Copilot coding agent before it starts work.
+# The job name must be exactly `copilot-setup-steps`.
+name: Copilot setup steps
+
+on:
+  workflow_dispatch:
+  push:
+    paths: [.github/workflows/copilot-setup-steps.yml]
+  pull_request:
+    paths: [.github/workflows/copilot-setup-steps.yml]
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          LEFTHOOK: 0
+      - name: Install Chromium for browser tests
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build once so generated wrappers and types exist
+        run: pnpm nx run-many -t build
