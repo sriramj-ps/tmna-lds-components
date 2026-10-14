@@ -4,7 +4,7 @@ import { angularOutputTarget } from '@stencil/angular-output-target';
 
 export const config: Config = {
   namespace: 'lds',
-  // Show a clear error instead of silently rendering nothing in old browsers
+  // Modern browsers only: no ES5 bundle
   buildEs5: false,
   outputTargets: [
     // 1. Lazy-loading bundle + loader script: for AEM HTL pages and plain HTML (one <script> tag)
@@ -42,6 +42,6 @@ export const config: Config = {
       valueAccessorConfigs: [],
     }),
   ],
-  // Fail the build on Stencil warnings in CI
+  // Fail the build if package.json main/module/types don't match the primary output
   validatePrimaryPackageOutputTarget: true,
 };
