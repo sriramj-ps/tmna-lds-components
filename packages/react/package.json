@@ -57,6 +57,11 @@
         ],
         "outputs": [],
         "cache": true
+      },
+      "build": {
+        "options": {
+          "command": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsc --build tsconfig.lib.json"
+        }
       }
     }
   }

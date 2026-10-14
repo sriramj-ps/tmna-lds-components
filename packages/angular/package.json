@@ -60,6 +60,22 @@
         ],
         "outputs": [],
         "cache": true
+      },
+      "nx-release-publish": {
+        "options": {
+          "packageRoot": "{projectRoot}/dist"
+        }
+      }
+    },
+    "release": {
+      "version": {
+        "manifestRootsToUpdate": [
+          "{projectRoot}",
+          {
+            "path": "{projectRoot}/dist",
+            "preserveLocalDependencyProtocols": false
+          }
+        ]
       }
     }
   }
