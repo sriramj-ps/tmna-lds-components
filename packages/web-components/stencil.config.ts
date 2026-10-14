@@ -11,8 +11,6 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      // Stencil checks package.json main/module/types against this output
-      isPrimaryPackageOutputTarget: true,
     },
     // 2. One ES module per component: for bundlers, and required by the React + Angular wrappers
     {
@@ -42,6 +40,6 @@ export const config: Config = {
       valueAccessorConfigs: [],
     }),
   ],
-  // Fail the build if package.json main/module/types don't match the primary output
-  validatePrimaryPackageOutputTarget: true,
+  // package.json is ESM-only on purpose; publint checks it in CI instead of Stencil's CJS-first defaults
+  validatePrimaryPackageOutputTarget: false,
 };

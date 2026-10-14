@@ -4,7 +4,7 @@
   "description": "LDS components as framework-agnostic web components (Stencil). Works in AEM HTL, React and Angular.",
   "license": "UNLICENSED",
   "type": "module",
-  "main": "./dist/index.cjs.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "collection": "./dist/collection/collection-manifest.json",
@@ -23,13 +23,11 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs.js"
+      "import": "./dist/index.js"
     },
     "./loader": {
       "types": "./loader/index.d.ts",
-      "import": "./loader/index.js",
-      "require": "./loader/index.cjs.js"
+      "import": "./loader/index.js"
     },
     "./components": {
       "types": "./components/index.d.ts",
@@ -132,5 +130,8 @@
         "cache": true
       }
     }
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
