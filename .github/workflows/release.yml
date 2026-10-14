@@ -3,6 +3,11 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
+      channel:
+        description: latest = real release from version plans; next = prerelease for early testing
+        type: choice
+        options: [latest, next]
+        default: latest
       dry-run:
         description: Preview only (no versions, tags or packages are written)
         type: boolean
@@ -47,7 +52,16 @@ jobs:
         env:
           JFROG_NPM_TOKEN: ${{ secrets.JFROG_NPM_TOKEN }}
 
-      - name: Version, changelog, tag, publish
+      - name: Version, changelog, tag, publish (latest)
+        if: inputs.channel == 'latest'
         run: pnpm nx release --yes ${{ inputs.dry-run && '--dry-run' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Prerelease (e.g. 0.2.0-next.3) under the "next" tag. No commit or tag; version plans are kept
+      # for the real release. Consumers opt in with: pnpm add @tmna-cx-design-system/react@next
+      - name: Prerelease (next)
+        if: inputs.channel == 'next'
+        run: |
+          pnpm nx release version prerelease --preid=next --git-commit=false --git-tag=false --stage-changes=false ${{ inputs.dry-run && '--dry-run' || '' }}
+          pnpm nx release publish --tag=next ${{ inputs.dry-run && '--dry-run' || '' }}
