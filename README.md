@@ -20,6 +20,7 @@ React and Angular wrappers are generated from it, and everything is published to
 ## Getting started
 
 ```bash
+git init -b main && git add -A && git commit -m "chore: initial LDS workspace"   # only if you started from the zip
 fnm use                      # Node 24 (see .nvmrc)
 pnpm install                 # also installs the git hooks
 pnpm exec playwright install chromium
