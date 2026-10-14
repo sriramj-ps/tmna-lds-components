@@ -4,10 +4,10 @@ export type ButtonVariant = 'primary' | 'secondary';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 /**
- * Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+ * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
  *
  * @slot - Button label
- * @part control - The inner <button> or <a>, for rare site-level overrides
+ * @part control - The inner `<button>` or `<a>`, for rare site-level overrides
  */
 @Component({
   tag: 'lds-button',

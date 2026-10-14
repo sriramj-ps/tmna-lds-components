@@ -9,7 +9,7 @@ import { ButtonSize, ButtonVariant } from "./components/lds-button/lds-button";
 export { ButtonSize, ButtonVariant } from "./components/lds-button/lds-button";
 export namespace Components {
     /**
-     * Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+     * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
      */
     interface LdsButton {
         /**
@@ -44,7 +44,7 @@ export namespace Components {
 }
 declare global {
     /**
-     * Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+     * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
      */
     interface HTMLLdsButtonElement extends Components.LdsButton, HTMLStencilElement {
     }
@@ -58,7 +58,7 @@ declare global {
 }
 declare namespace LocalJSX {
     /**
-     * Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+     * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
      */
     interface LdsButton {
         /**
@@ -117,7 +117,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             /**
-             * Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+             * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
              */
             "lds-button": LocalJSX.IntrinsicElements["lds-button"] & JSXBase.HTMLAttributes<HTMLLdsButtonElement>;
         }

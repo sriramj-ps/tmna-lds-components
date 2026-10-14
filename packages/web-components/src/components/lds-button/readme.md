@@ -5,7 +5,7 @@
 
 ## Overview
 
-Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
+Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
 
 ## Properties
 
@@ -28,9 +28,9 @@ Primary call-to-action button. Renders a native <button>, or an <a> when `href` 
 
 ## Shadow Parts
 
-| Part        | Description                                              |
-| ----------- | -------------------------------------------------------- |
-| `"control"` | The inner <button> or <a>, for rare site-level overrides |
+| Part        | Description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `"control"` | The inner `<button>` or `<a>`, for rare site-level overrides |
 
 
 ----------------------------------------------

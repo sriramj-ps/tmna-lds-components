@@ -1,0 +1,76 @@
+{
+  "name": "@lds/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/web-components-vite": "catalog:",
+    "@tmna-cx-design-system/foundation": "workspace:*",
+    "@tmna-cx-design-system/tokens": "workspace:*",
+    "@tmna-cx-design-system/web-components": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "lit": "catalog:",
+    "playwright": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "storybook": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:app"
+    ],
+    "targets": {
+      "storybook": {
+        "command": "storybook dev -p 6006 --no-open",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "continuous": true
+      },
+      "build-storybook": {
+        "command": "storybook build -o dist",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "default",
+          "^production",
+          "{workspaceRoot}/packages/web-components/src/**/*.stories.ts"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "cache": true
+      },
+      "test": {
+        "command": "vitest run",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "default",
+          "^production",
+          "{workspaceRoot}/packages/web-components/src/**/*.stories.ts"
+        ],
+        "outputs": [],
+        "cache": true
+      }
+    }
+  }
+}

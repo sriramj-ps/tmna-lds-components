@@ -57,7 +57,10 @@
   "devDependencies": {
     "@stencil/angular-output-target": "catalog:",
     "@stencil/core": "catalog:",
-    "@stencil/react-output-target": "catalog:"
+    "@stencil/react-output-target": "catalog:",
+    "@storybook/web-components-vite": "catalog:",
+    "lit": "catalog:",
+    "storybook": "catalog:"
   },
   "nx": {
     "tags": [

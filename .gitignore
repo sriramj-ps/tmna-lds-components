@@ -53,3 +53,4 @@ packages/web-components/www
 packages/*/src/generated
 storybook-static
 *.tsbuildinfo
+apps/storybook/dist
