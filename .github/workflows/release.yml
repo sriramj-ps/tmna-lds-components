@@ -58,10 +58,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Prerelease (e.g. 0.2.0-next.3) under the "next" tag. No commit or tag; version plans are kept
+      # Prerelease (e.g. 0.1.1-next.57) under the "next" tag. No commit or tag; version plans are kept
       # for the real release. Consumers opt in with: pnpm add @tmna-cx-design-system/react@next
       - name: Prerelease (next)
         if: inputs.channel == 'next'
         run: |
-          pnpm nx release version prerelease --preid=next --git-commit=false --git-tag=false --stage-changes=false ${{ inputs.dry-run && '--dry-run' || '' }}
+          # <last release with patch + 1>-next.<run number>, e.g. 0.1.1-next.57 - unique for every run
+          V=$(node -e "const [a,b,c]=require('./packages/web-components/package.json').version.split('-')[0].split('.').map(Number); console.log(a+'.'+b+'.'+(c+1)+'-next.'+process.env.GITHUB_RUN_NUMBER)")
+          pnpm nx release version "$V" --git-commit=false --git-tag=false --stage-changes=false ${{ inputs.dry-run && '--dry-run' || '' }}
           pnpm nx release publish --tag=next ${{ inputs.dry-run && '--dry-run' || '' }}
