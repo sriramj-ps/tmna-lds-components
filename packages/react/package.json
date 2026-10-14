@@ -16,9 +16,6 @@
     },
     "./package.json": "./package.json"
   },
-  "publishConfig": {
-    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
-  },
   "dependencies": {
     "@stencil/react-output-target": "catalog:",
     "@tmna-cx-design-system/web-components": "workspace:^"

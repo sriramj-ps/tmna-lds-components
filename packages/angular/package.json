@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "description": "Angular standalone components for LDS: thin typed wrappers generated from the web components",
   "license": "UNLICENSED",
-  "publishConfig": {
-    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
-  },
   "dependencies": {
     "@tmna-cx-design-system/web-components": "workspace:^",
     "tslib": "^2.8.1"

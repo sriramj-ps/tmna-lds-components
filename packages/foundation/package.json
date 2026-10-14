@@ -15,9 +15,6 @@
     "./min": "./dist/foundation.min.css",
     "./package.json": "./package.json"
   },
-  "publishConfig": {
-    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
-  },
   "dependencies": {
     "@tmna-cx-design-system/tokens": "workspace:*"
   },

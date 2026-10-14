@@ -48,9 +48,6 @@
     "./package.json": "./package.json"
   },
   "customElements": "./dist/custom-elements.json",
-  "publishConfig": {
-    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
-  },
   "peerDependencies": {
     "@tmna-cx-design-system/tokens": "workspace:^"
   },

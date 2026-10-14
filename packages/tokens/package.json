@@ -21,9 +21,6 @@
     "./json/*.json": "./dist/json/*.json",
     "./package.json": "./package.json"
   },
-  "publishConfig": {
-    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
-  },
   "devDependencies": {
     "style-dictionary": "catalog:"
   },
