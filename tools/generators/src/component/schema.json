@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "LdsComponent",
+  "title": "Create an LDS component",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Component name in kebab-case, without the lds- prefix (e.g. 'card', 'icon-button')",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "$default": { "$source": "argv", "index": 0 },
+      "x-prompt": "Component name (kebab-case, no lds- prefix)?"
+    },
+    "description": {
+      "type": "string",
+      "description": "One sentence: what the component is for. Becomes the JSDoc and Storybook description.",
+      "default": "TODO: describe what this component is for."
+    },
+    "storyGroup": {
+      "type": "string",
+      "description": "Storybook sidebar group",
+      "enum": ["Core", "Organisms"],
+      "default": "Core"
+    }
+  },
+  "required": ["name"]
+}

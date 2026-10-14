@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "component": {
+      "factory": "./src/component/generator",
+      "schema": "./src/component/schema.json",
+      "description": "Create a new LDS web component with styles, stories and a visual test"
+    }
+  }
+}

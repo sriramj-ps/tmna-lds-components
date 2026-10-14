@@ -21,6 +21,8 @@
     "@nx/eslint": "catalog:",
     "@nx/eslint-plugin": "catalog:",
     "@nx/js": "catalog:",
+    "@swc-node/register": "catalog:",
+    "@swc/core": "catalog:",
     "@swc/helpers": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "eslint": "catalog:",

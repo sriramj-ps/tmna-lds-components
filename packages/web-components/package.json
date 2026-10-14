@@ -73,9 +73,14 @@
     ],
     "targets": {
       "build": {
-        "command": "stencil build",
+        "executor": "nx:run-commands",
         "options": {
-          "cwd": "{projectRoot}"
+          "cwd": "{projectRoot}",
+          "commands": [
+            "node -e \"for (const d of ['../react/src/generated', '../angular/src/generated']) require('node:fs').rmSync(d, { recursive: true, force: true })\"",
+            "stencil build"
+          ],
+          "parallel": false
         },
         "inputs": [
           "production",

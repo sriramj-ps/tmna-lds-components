@@ -1,0 +1,15 @@
+{
+  "name": "@lds/generators",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "generators": "./generators.json",
+  "dependencies": {
+    "@nx/devkit": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:tool"
+    ]
+  }
+}

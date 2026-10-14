@@ -1,0 +1,26 @@
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
+import { expect } from 'storybook/test';
+
+type Args = { variant: 'default' | 'subtle'; content: string };
+
+const meta = {
+  title: '<%= storyGroup %>/<%= title %>',
+  component: '<%= tag %>',
+  args: { variant: 'default', content: 'Content goes here' },
+  argTypes: { variant: { control: 'inline-radio', options: ['default', 'subtle'] } },
+  render: (args) => html`<<%= tag %> variant=${args.variant}>${args.content}</<%= tag %>>`,
+} satisfies Meta<Args>;
+
+export default meta;
+type Story = StoryObj<Args>;
+
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const host = canvasElement.querySelector('<%= tag %>');
+    await customElements.whenDefined('<%= tag %>');
+    await expect(host?.shadowRoot?.querySelector('.container')).toBeTruthy();
+  },
+};
+
+export const Subtle: Story = { args: { variant: 'subtle' } };

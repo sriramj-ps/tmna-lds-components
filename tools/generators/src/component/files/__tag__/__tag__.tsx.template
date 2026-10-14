@@ -1,0 +1,27 @@
+import { Component, Host, Prop, h } from '@stencil/core';
+
+/**
+ * <%= description %>
+ *
+ * @slot - Main content
+ * @part container - The outer wrapper, for rare site-level overrides
+ */
+@Component({
+  tag: '<%= tag %>',
+  styleUrl: '<%= tag %>.css',
+  shadow: true,
+})
+export class <%= className %> {
+  /** Visual emphasis. Values come from the brand's tokens. */
+  @Prop({ reflect: true }) variant: 'default' | 'subtle' = 'default';
+
+  render() {
+    return (
+      <Host>
+        <div part="container" class={{ container: true, [`container--${this.variant}`]: true }}>
+          <slot />
+        </div>
+      </Host>
+    );
+  }
+}

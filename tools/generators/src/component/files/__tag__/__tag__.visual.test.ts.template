@@ -1,0 +1,21 @@
+import { page } from 'vitest/browser';
+import { beforeAll, expect, test } from 'vitest';
+import '@tmna-cx-design-system/tokens/css';
+import { defineCustomElement } from '../../../components/<%= tag %>.js';
+
+beforeAll(() => defineCustomElement());
+
+for (const brand of ['toyota', 'lexus'] as const) {
+  test(`<%= tag %> looks right in ${brand}`, async () => {
+    document.body.innerHTML = `
+      <div data-testid="stage" data-brand="${brand}" style="display:inline-block;padding:8px">
+        <<%= tag %>>Default</<%= tag %>>
+        <<%= tag %> variant="subtle">Subtle</<%= tag %>>
+      </div>`;
+    await customElements.whenDefined('<%= tag %>');
+    for (const host of Array.from(document.querySelectorAll('<%= tag %>'))) {
+      await expect.poll(() => host.shadowRoot?.querySelector('.container')).toBeTruthy();
+    }
+    await expect.element(page.getByTestId('stage')).toMatchScreenshot(`<%= tag %>-${brand}`);
+  });
+}

@@ -39,6 +39,7 @@ catalogMode: strict
 catalog:
   nx: 23.3.0
   '@nx/js': 23.3.0
+  '@nx/devkit': 23.3.0
   prettier: ^3.9.10
   '@swc/helpers': ~0.5.18
   typescript: ~6.0.3
@@ -86,3 +87,5 @@ catalog:
   stylelint-config-standard: ^40.0.0
   stylelint-declaration-strict-value: ^1.12.1
   typescript-eslint: ^8.71.2
+  '@swc-node/register': ^1.12.1
+  '@swc/core': ^1.16.18
