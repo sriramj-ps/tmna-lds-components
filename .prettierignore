@@ -9,3 +9,5 @@
 /.nx/cache
 /.nx/workspace-data
 pnpm-lock.yaml
+packages/web-components/src/**/readme.md
+packages/web-components/src/components.d.ts

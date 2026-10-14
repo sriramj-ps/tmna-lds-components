@@ -12,6 +12,8 @@ allowBuilds:
   esbuild: true
   '@swc/core': true
   lefthook: true
+  # Explicitly denied: ships prebuilt binaries, its script is not needed
+  '@parcel/watcher': false
 # Fail the install if a package that is NOT in allowBuilds wants to run a script
 strictDepBuilds: true
 # Refuse versions published less than 1 day ago (minutes)
@@ -45,6 +47,17 @@ catalog:
   '@stencil/core': ^4.45.2
   '@stencil/react-output-target': ^1.6.5
   '@stencil/angular-output-target': ^1.5.2
+  react: ^19.3.0
+  react-dom: ^19.3.0
+  '@types/react': ^19.3.0
+  '@types/react-dom': ^19.3.0
+  '@angular/core': ^22.2.2
+  '@angular/common': ^22.2.2
+  '@angular/compiler': ^22.2.2
+  '@angular/compiler-cli': ^22.2.2
+  '@angular/platform-browser': ^22.2.2
+  ng-packagr: ^22.2.4
+  rxjs: ^7.8.2
   browserslist: ^4.28.1
   tslib: ^2.8.1
   '@nx/eslint': 23.3.0

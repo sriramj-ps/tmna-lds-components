@@ -1,0 +1,66 @@
+{
+  "name": "@tmna-cx-design-system/angular",
+  "version": "0.0.0",
+  "description": "Angular standalone components for LDS: thin typed wrappers generated from the web components",
+  "license": "UNLICENSED",
+  "publishConfig": {
+    "registry": "https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/"
+  },
+  "dependencies": {
+    "@tmna-cx-design-system/web-components": "workspace:^",
+    "tslib": "catalog:"
+  },
+  "peerDependencies": {
+    "@angular/core": "^22.0.0",
+    "rxjs": "^7.4.0"
+  },
+  "devDependencies": {
+    "@angular/common": "catalog:",
+    "@angular/compiler": "catalog:",
+    "@angular/compiler-cli": "catalog:",
+    "@angular/core": "catalog:",
+    "@angular/platform-browser": "catalog:",
+    "ng-packagr": "catalog:",
+    "rxjs": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:wrapper",
+      "framework:angular"
+    ],
+    "targets": {
+      "build": {
+        "command": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "cache": true
+      },
+      "typecheck": {
+        "command": "tsc -p tsconfig.lib.json --noEmit",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [],
+        "cache": true
+      }
+    }
+  }
+}

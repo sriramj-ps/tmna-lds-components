@@ -1,0 +1,5 @@
+{
+  // For editors only. ng-packagr builds with tsconfig.lib.json.
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": { "noEmit": true }
+}

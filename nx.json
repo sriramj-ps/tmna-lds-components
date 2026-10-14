@@ -20,7 +20,7 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": ["packages/web-components/**"]
+      "exclude": ["packages/web-components/**", "packages/angular/**"]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -40,5 +40,8 @@
       "dependsOn": ["^build"],
       "cache": true
     }
+  },
+  "sync": {
+    "disabledTaskSyncGenerators": ["@nx/js:typescript-sync"]
   }
 }

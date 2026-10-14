@@ -2,6 +2,7 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Overview
 
 Primary call-to-action button. Renders a native <button>, or an <a> when `href` is set.
@@ -17,11 +18,13 @@ Primary call-to-action button. Renders a native <button>, or an <a> when `href` 
 | `type`     | `type`     | Native button type. `submit` submits the surrounding form. | `"button" \| "reset" \| "submit"` | `'button'`  |
 | `variant`  | `variant`  | Visual style. Values come from the brand's tokens.         | `"primary" \| "secondary"`        | `'primary'` |
 
+
 ## Slots
 
 | Slot | Description  |
 | ---- | ------------ |
 |      | Button label |
+
 
 ## Shadow Parts
 
@@ -29,4 +32,7 @@ Primary call-to-action button. Renders a native <button>, or an <a> when `href` 
 | ----------- | -------------------------------------------------------- |
 | `"control"` | The inner <button> or <a>, for rare site-level overrides |
 
----
+
+----------------------------------------------
+
+
