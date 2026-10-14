@@ -1,6 +1,11 @@
 # Add files here to ignore them from prettier formatting
-/dist
-/coverage
+**/dist
+**/www
+**/loader
+**/coverage
+**/storybook-static
+**/src/generated
+**/components.d.ts
 /.nx/cache
 /.nx/workspace-data
 pnpm-lock.yaml

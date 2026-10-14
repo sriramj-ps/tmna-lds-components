@@ -1,0 +1,28 @@
+# Git hooks. Installed automatically by `pnpm install` (lefthook's postinstall).
+# Skip once in an emergency with: LEFTHOOK=0 git commit ...
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      glob: '*.{js,mjs,cjs,ts,tsx,json,md,yml,yaml,css,html}'
+      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+    - name: eslint
+      glob: '*.{js,mjs,cjs,ts,tsx}'
+      run: pnpm exec eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    - name: stylelint
+      glob: '*.css'
+      run: pnpm exec stylelint --fix {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit {1}
+
+pre-push:
+  jobs:
+    - name: affected-checks
+      run: pnpm nx affected -t lint typecheck test --base=origin/main --head=HEAD
