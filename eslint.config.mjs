@@ -23,13 +23,32 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
     rules: {
-      // Filled in Step 9 (which package may import which)
       '@nx/enforce-module-boundaries': [
         'error',
         {
           enforceBuildableLibDependency: true,
           allow: [],
-          depConstraints: [{ sourceTag: '*', onlyDependOnLibsWithTags: ['*'] }],
+          // Who may import whom. Lower layers never import higher ones.
+          depConstraints: [
+            { sourceTag: 'type:tokens', onlyDependOnLibsWithTags: [] },
+            { sourceTag: 'type:foundation', onlyDependOnLibsWithTags: ['type:tokens'] },
+            {
+              sourceTag: 'level:core',
+              onlyDependOnLibsWithTags: ['type:tokens', 'type:foundation', 'type:icons'],
+            },
+            {
+              sourceTag: 'level:organism',
+              onlyDependOnLibsWithTags: [
+                'level:core',
+                'type:tokens',
+                'type:foundation',
+                'type:icons',
+              ],
+            },
+            { sourceTag: 'type:wrapper', onlyDependOnLibsWithTags: ['type:components'] },
+            { sourceTag: 'type:tool', onlyDependOnLibsWithTags: ['type:tool', 'type:tokens'] },
+            { sourceTag: 'type:app', onlyDependOnLibsWithTags: ['*'] },
+          ],
         },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
