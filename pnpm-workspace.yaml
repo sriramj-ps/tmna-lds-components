@@ -1,6 +1,39 @@
+# Which folders hold workspace packages
 packages:
   - 'packages/*'
+  - 'packages/organisms/*'
+  - 'apps/*'
+  - 'tools/*'
 
-autoInstallPeers: true
+# ---------- Supply-chain safety ----------
+# Only these packages may run install scripts (postinstall etc.)
 allowBuilds:
   nx: true
+  esbuild: true
+  '@swc/core': true
+  lefthook: true
+# Fail the install if a package that is NOT in allowBuilds wants to run a script
+strictDepBuilds: true
+# Refuse versions published less than 1 day ago (minutes)
+minimumReleaseAge: 1440
+# Our own packages are exempt so a fresh release can be consumed right away
+minimumReleaseAgeExclude:
+  - '@tmna-cx-design-system/*'
+  - '@tmna-cx-ds-organisms/*'
+# Refuse a new version if its publish trust level dropped (e.g. lost provenance)
+trustPolicy: no-downgrade
+# Only judge versions published in the last 30 days (old packages like semver@6 predate provenance)
+trustPolicyIgnoreAfter: 43200
+
+# ---------- Dependency behaviour ----------
+autoInstallPeers: true
+# Workspace packages must be referenced with workspace:* (never pulled from JFrog by accident)
+linkWorkspacePackages: false
+saveWorkspaceProtocol: rolling
+
+# ---------- One place for shared versions ----------
+# Packages write "typescript": "catalog:" instead of a version number
+catalogMode: strict
+catalog:
+  typescript: ~6.0.3
+  tslib: ^2.8.1
