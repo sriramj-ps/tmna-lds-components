@@ -42,7 +42,8 @@
           "{projectRoot}/dist"
         ],
         "cache": true
-      }
+      },
+      "publint": {}
     }
   }
 }

@@ -54,6 +54,17 @@
         "^build"
       ],
       "cache": true
+    },
+    "publint": {
+      "command": "publint {projectRoot} --strict",
+      "dependsOn": [
+        "build"
+      ],
+      "cache": true,
+      "inputs": [
+        "production"
+      ],
+      "outputs": []
     }
   },
   "sync": {
@@ -66,7 +77,17 @@
       "@tmna-cx-design-system/*"
     ],
     "projectsRelationship": "fixed",
-    "versionPlans": true,
+    "versionPlans": {
+      "ignorePatternsForPlanCheck": [
+        "**/*.stories.ts",
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/__screenshots__/**",
+        "**/*.md",
+        "**/eslint.config.*",
+        "**/vitest.config.*"
+      ]
+    },
     "version": {
       "preVersionCommand": "pnpm nx run-many -t build",
       "adjustSemverBumpsForZeroMajorVersion": false

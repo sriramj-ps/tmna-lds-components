@@ -66,6 +66,9 @@
         "options": {
           "packageRoot": "{projectRoot}/dist"
         }
+      },
+      "publint": {
+        "command": "publint {projectRoot}/dist --strict --pack false"
       }
     },
     "release": {

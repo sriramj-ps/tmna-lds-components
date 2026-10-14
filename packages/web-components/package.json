@@ -128,7 +128,8 @@
         ],
         "outputs": [],
         "cache": true
-      }
+      },
+      "publint": {}
     }
   },
   "engines": {
