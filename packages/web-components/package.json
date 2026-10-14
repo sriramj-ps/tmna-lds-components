@@ -59,8 +59,12 @@
     "@stencil/core": "catalog:",
     "@stencil/react-output-target": "catalog:",
     "@storybook/web-components-vite": "catalog:",
+    "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "lit": "catalog:",
-    "storybook": "catalog:"
+    "playwright": "catalog:",
+    "storybook": "catalog:",
+    "vitest": "catalog:"
   },
   "nx": {
     "tags": [
@@ -109,6 +113,21 @@
           "^production"
         ],
         "outputs": []
+      },
+      "test": {
+        "command": "vitest run",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "inputs": [
+          "default",
+          "^production"
+        ],
+        "outputs": [],
+        "cache": true
       }
     }
   }

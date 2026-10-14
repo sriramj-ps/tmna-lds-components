@@ -41,7 +41,9 @@ async function control(canvasElement: HTMLElement) {
   };
   await customElements.whenDefined('lds-button');
   await host.componentOnReady?.();
-  return host.shadowRoot!.querySelector('.control') as HTMLElement;
+  const inner = host.shadowRoot?.querySelector<HTMLElement>('.control');
+  if (!inner) throw new Error('lds-button did not render its control');
+  return inner;
 }
 
 export const Primary: Story = {
@@ -93,8 +95,10 @@ export const BothBrands: Story = {
   play: async ({ canvasElement }) => {
     const [toyota, lexus] = Array.from(canvasElement.querySelectorAll('lds-button'));
     await customElements.whenDefined('lds-button');
-    const bg = (el: Element) =>
-      getComputedStyle(el.shadowRoot!.querySelector('.control')!).backgroundColor;
+    const bg = (el: Element) => {
+      const inner = el.shadowRoot?.querySelector('.control');
+      return inner ? getComputedStyle(inner).backgroundColor : '';
+    };
     await expect(bg(toyota)).not.toBe(bg(lexus));
   },
 };
