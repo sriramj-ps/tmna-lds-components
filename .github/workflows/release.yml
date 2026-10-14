@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Preview only (no versions, tags or packages are written)
+        type: boolean
+        default: true
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Protected environment: add required reviewers in Settings > Environments > release
+    environment: release
+    permissions:
+      contents: write # push the release commit + tag, create the GitHub release
+    env:
+      LEFTHOOK: 0
+      NX_NO_CLOUD: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Git identity for the release commit
+        run: |
+          git config user.name "lds-release-bot"
+          git config user.email "lds-release-bot@users.noreply.github.com"
+
+      - name: Authenticate to JFrog (token stays outside the repo)
+        run: pnpm config set "//YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/:_authToken" "$JFROG_NPM_TOKEN"
+        env:
+          JFROG_NPM_TOKEN: ${{ secrets.JFROG_NPM_TOKEN }}
+
+      - name: Version, changelog, tag, publish
+        run: pnpm nx release --yes ${{ inputs.dry-run && '--dry-run' || '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

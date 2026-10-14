@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Lint, test, build
+    runs-on: ubuntu-latest
+    # Same image locally and in CI, so screenshot references match pixel for pixel
+    container: mcr.microsoft.com/playwright:v1.64.0-noble
+    timeout-minutes: 30
+    env:
+      LEFTHOOK: 0
+      NX_NO_CLOUD: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # Nx needs history to work out what a PR affected
+
+      - uses: pnpm/action-setup@v6 # version comes from "packageManager" in package.json
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Work out base and head commits for nx affected
+        uses: nrwl/nx-set-shas@v5
+
+      - name: Formatting
+        run: pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
+
+      - name: Lint, typecheck, build, test, package checks (affected projects only)
+        run: pnpm nx affected -t lint stylelint typecheck build test publint --base=$NX_BASE --head=$NX_HEAD
+
+      - name: Generated files are committed and up to date (public API, readmes)
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git diff --exit-code
+
+      - name: Changed packages have a version plan
+        if: github.event_name == 'pull_request'
+        run: pnpm nx release plan:check --base=$NX_BASE --head=$NX_HEAD
+
+      - name: Upload visual diffs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-diffs
+          path: |
+            **/.vitest/attachments/**
+            **/__screenshots__/**
+          if-no-files-found: ignore

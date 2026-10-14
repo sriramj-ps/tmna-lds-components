@@ -2,15 +2,8 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "analytics": false,
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.mjs"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/eslint.config.mjs"],
     "sharedGlobals": []
   },
   "plugins": [
@@ -27,10 +20,7 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": [
-        "packages/web-components/**",
-        "packages/angular/**"
-      ]
+      "exclude": ["packages/web-components/**", "packages/angular/**"]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -43,39 +33,26 @@
     "stylelint": {
       "command": "stylelint \"{projectRoot}/src/**/*.css\" --allow-empty-input",
       "cache": true,
-      "inputs": [
-        "default",
-        "{workspaceRoot}/stylelint.config.mjs"
-      ],
+      "inputs": ["default", "{workspaceRoot}/stylelint.config.mjs"],
       "outputs": []
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "cache": true
     },
     "publint": {
       "command": "publint {projectRoot} --strict",
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "cache": true,
-      "inputs": [
-        "production"
-      ],
+      "inputs": ["production"],
       "outputs": []
     }
   },
   "sync": {
-    "disabledTaskSyncGenerators": [
-      "@nx/js:typescript-sync"
-    ]
+    "disabledTaskSyncGenerators": ["@nx/js:typescript-sync"]
   },
   "release": {
-    "projects": [
-      "@tmna-cx-design-system/*"
-    ],
+    "projects": ["@tmna-cx-design-system/*"],
     "projectsRelationship": "fixed",
     "versionPlans": {
       "ignorePatternsForPlanCheck": [
