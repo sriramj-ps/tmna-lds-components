@@ -25,4 +25,10 @@ commit-msg:
 pre-push:
   jobs:
     - name: affected-checks
-      run: pnpm nx affected -t lint typecheck test --base=origin/main --head=HEAD
+      # The first push to an empty remote has no origin/main yet: check every project instead.
+      run: |
+        if git rev-parse --verify --quiet origin/main >/dev/null; then
+          pnpm nx affected -t lint typecheck test --base=origin/main --head=HEAD
+        else
+          pnpm nx run-many -t lint typecheck test
+        fi
