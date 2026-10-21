@@ -11,3 +11,6 @@
 pnpm-lock.yaml
 packages/web-components/src/**/readme.md
 packages/web-components/src/components.d.ts
+**/styled-system
+# Nx-managed AI skills, rewritten by `nx configure-ai-agents`
+.github/skills/nx-*
