@@ -1,0 +1,20 @@
+/* Page layout for the example only. Uses LDS tokens like any consuming app should. */
+.page {
+  max-width: var(--lds-sizes-4xl);
+  margin-inline: auto;
+  padding: var(--lds-spacing-6);
+  font-family: var(--lds-fonts-sans);
+  color: var(--lds-colors-black);
+}
+
+.example {
+  margin-block-end: var(--lds-spacing-8);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lds-spacing-3);
+  align-items: center;
+  margin-block: var(--lds-spacing-4);
+}

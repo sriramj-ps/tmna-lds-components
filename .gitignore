@@ -56,4 +56,12 @@ storybook-static
 *.tsbuildinfo
 apps/storybook/dist
 .vitest
+# Angular CLI cache (apps/angular-example)
+.angular
 packages/styles/styled-system
+
+# Slingshot (AI coding assistant): shared prompts live in .github/prompts. Its local state and AI
+# provenance files (user names and prompts per edited chunk) stay out of git unless TMNA asks for it.
+.slingshot/code-tagging/
+.slingshot/memory.json
+.slingshot/**/*cache.json

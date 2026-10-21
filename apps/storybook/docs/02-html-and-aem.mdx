@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/HTML and AEM" />
+
+# HTML and AEM
+
+## AEM HTL pages (no bundler)
+
+Serve two files from a clientlib (or the JFrog/CDN copy) and add two tags to the page template.
+The loader registers every `lds-*` tag and downloads a component's code only when it is on the page.
+
+```html
+<link rel="stylesheet" href="/etc.clientlibs/lds/styles/tokens.css" />
+<script type="module" src="/etc.clientlibs/lds/web-components/lds/lds.esm.js"></script>
+
+<lds-button variant="secondary" href="/configurator">Configure yours</lds-button>
+```
+
+| File in the clientlib  | Copied from                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| `styles/tokens.css`    | `@tmna-cx-design-system/styles/dist/css/styles/tokens.css`         |
+| `styles/styles.css`    | `@tmna-cx-design-system/styles/dist/styles.css` (tokens + classes) |
+| `web-components/lds/*` | `@tmna-cx-design-system/web-components/dist/lds/` (whole folder)   |
+
+## Pages built with a bundler (Vite, webpack)
+
+One import defines every component:
+
+```js
+import '@tmna-cx-design-system/styles/tokens.css';
+import '@tmna-cx-design-system/web-components/register';
+```
+
+To ship only what a page uses, import components one by one instead:
+
+```js
+import { defineCustomElement } from '@tmna-cx-design-system/web-components/components/lds-button.js';
+defineCustomElement();
+```
+
+Both are safe to load twice: an element that is already defined is skipped.
+
+## Forms
+
+Form controls take part in their form like native ones. `lds-button type="submit"` submits its
+`form`, even from inside shadow DOM. Give inputs a `name` as usual.
+
+## CSS classes only (no JavaScript)
+
+For markup that can't be a web component, every recipe is also available as plain classes in
+`styles.css` (use it instead of `tokens.css`). You get the look only; focus, keyboard and form
+behaviour are yours to handle.
+
+```html
+<link rel="stylesheet" href="/etc.clientlibs/lds/styles/styles.css" />
+
+<a class="lds-button lds-button--variant_secondary lds-button--size_md" href="/offers">Offers</a>
+```
+
+Class names follow `lds-<recipe>` plus `lds-<recipe>--<variant>_<value>`. They are public API:
+renaming one is a breaking change, announced in the changelog.
+
+## Events
+
+Listen to component events with `addEventListener`. Events cross the shadow DOM boundary
+(`composed: true`), so listening on a parent works too. Each component's Docs page lists its events.

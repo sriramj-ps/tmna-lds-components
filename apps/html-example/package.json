@@ -5,6 +5,7 @@
   "description": "Plain HTML page consuming LDS: <lds-*> web components and the recipe CSS classes",
   "type": "module",
   "devDependencies": {
+    "@lds/smoke-test": "workspace:*",
     "@tmna-cx-design-system/styles": "workspace:*",
     "@tmna-cx-design-system/web-components": "workspace:*",
     "vite": "catalog:"
@@ -43,7 +44,22 @@
         ],
         "continuous": true
       },
-      "stylelint": {}
+      "stylelint": {},
+      "test": {
+        "command": "lds-smoke dist",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "inputs": [
+          "default",
+          "^production"
+        ],
+        "outputs": []
+      }
     }
   }
 }

@@ -8,6 +8,7 @@
 - [ ] Keyboard and screen reader checked; no axe violations
 - [ ] New/changed behaviour has a story `play()`; visual references updated only where the look changed on purpose
 - [ ] Public API change? (props, events, slots, parts, recipes or recipe variants) - described below and version plan bump matches
+- [ ] Consumers need to do something differently? Storybook guides (`apps/storybook/docs/`) updated
 - [ ] Version plan added (`pnpm nx release plan <patch|minor|major>`) if this should be released
 
 ## Screenshots

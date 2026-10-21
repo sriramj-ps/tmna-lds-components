@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/Getting started" />
+
+# Getting started
+
+LDS is the Toyota and Lexus component library. Every component is written once as a web component
+and ships three ways: plain HTML (including AEM HTL), React and Angular. Its look comes from the
+TMNA Panda CSS preset, maintained in the lxc-lds-style styling repo.
+
+## Packages
+
+| Package                                 | Install it when                                                      |
+| --------------------------------------- | -------------------------------------------------------------------- |
+| `@tmna-cx-design-system/styles`         | Always. It holds the design tokens (`--lds-*` CSS variables).        |
+| `@tmna-cx-design-system/web-components` | HTML and AEM pages, or React 19 apps that use the elements directly. |
+| `@tmna-cx-design-system/react`          | React apps. Typed wrappers with React-style props and events.        |
+| `@tmna-cx-design-system/angular`        | Angular apps. Standalone components with typed inputs.               |
+
+The packages are published to JFrog. Point the `@tmna-cx-design-system` scope at it in your `.npmrc`:
+
+```ini
+@tmna-cx-design-system:registry=https://YOUR-COMPANY.jfrog.io/artifactory/api/npm/lds-npm/
+```
+
+## Two rules for every app
+
+1. **Load the tokens once per page**: `@tmna-cx-design-system/styles/tokens.css`. Components read
+   these variables; without them they render unstyled.
+2. **Use the component, not its markup.** Each component's inside (its shadow DOM) can change in any
+   release. Style it only through its public API: props, slots and CSS parts (see Guides/Customising).
+
+## Pick your guide
+
+- **AEM HTL or a plain HTML page**: Guides/HTML and AEM
+- **React**: Guides/React
+- **Angular**: Guides/Angular
+- **Trying a change before it is released**: Guides/Test locally
+
+Each guide has a working app in the LDS repo: `apps/html-example`, `apps/react-example` and
+`apps/angular-example`. CI builds them and checks them in a real browser on every pull request that touches LDS.

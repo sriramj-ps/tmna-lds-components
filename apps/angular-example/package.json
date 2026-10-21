@@ -1,0 +1,67 @@
+{
+  "name": "@lds/angular-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Angular app consuming LDS through the generated standalone wrappers",
+  "type": "module",
+  "dependencies": {
+    "@angular/common": "catalog:",
+    "@angular/core": "catalog:",
+    "@angular/platform-browser": "catalog:",
+    "@tmna-cx-design-system/angular": "workspace:*",
+    "@tmna-cx-design-system/styles": "workspace:*",
+    "@tmna-cx-design-system/web-components": "workspace:*",
+    "rxjs": "catalog:",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "catalog:",
+    "@angular/cli": "catalog:",
+    "@angular/compiler": "catalog:",
+    "@angular/compiler-cli": "catalog:",
+    "@lds/smoke-test": "workspace:*",
+    "typescript": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:app"
+    ],
+    "targets": {
+      "serve": {
+        "command": "ng serve",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "continuous": true
+      },
+      "build": {
+        "command": "ng build",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "outputs": [
+          "{projectRoot}/dist"
+        ]
+      },
+      "test": {
+        "command": "lds-smoke dist/browser",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "inputs": [
+          "default",
+          "^production"
+        ],
+        "outputs": []
+      },
+      "stylelint": {}
+    }
+  }
+}

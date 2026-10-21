@@ -10,7 +10,8 @@
     "format": "nx format:write",
     "format:check": "nx format:check",
     "affected": "nx affected -t lint stylelint typecheck test build",
-    "graph": "nx graph"
+    "graph": "nx graph",
+    "pack:local": "node tools/scripts/pack-local.mjs"
   },
   "private": true,
   "dependencies": {},

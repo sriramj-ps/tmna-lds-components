@@ -3,10 +3,9 @@
 //    the components bring their own recipe CSS inside their shadow DOM.
 import '@tmna-cx-design-system/styles/styles.css';
 import './page.css';
-// 2. Register the components this page uses. One import per component keeps the bundle small.
-import { defineCustomElement as defineLdsButton } from '@tmna-cx-design-system/web-components/components/lds-button.js';
-
-defineLdsButton();
+// 2. Define every <lds-*> element with one import. To ship only what a page uses, import per
+//    component instead: `import { defineCustomElement } from '…/web-components/components/lds-button.js'`.
+import '@tmna-cx-design-system/web-components/register';
 
 // <lds-button type="submit"> submits its form like a native button, even from inside shadow DOM
 const form = document.querySelector<HTMLFormElement>('#quote-form');

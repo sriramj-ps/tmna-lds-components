@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/Browser support" />
+
+# Browser support
+
+LDS ships modern JavaScript and CSS only: no ES5 build and no polyfills. These are the oldest versions
+that run every feature LDS uses.
+
+| Browser        | Oldest supported | Set by                                               |
+| -------------- | ---------------- | ---------------------------------------------------- |
+| Chrome, Edge   | 99               | CSS cascade layers (`@layer`) in the Panda output    |
+| Firefox        | 97               | CSS cascade layers                                   |
+| Safari (macOS) | 16.4             | Form-associated custom elements (`ElementInternals`) |
+| Safari (iOS)   | 16.4             | Form-associated custom elements                      |
+
+Older browsers are not tested: components may render unstyled or not at all. Internet Explorer is not
+supported.

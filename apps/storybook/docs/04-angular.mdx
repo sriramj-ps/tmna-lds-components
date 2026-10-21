@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/Angular" />
+
+# Angular
+
+Add the tokens to the global styles, either in `angular.json`:
+
+```json
+"styles": ["node_modules/@tmna-cx-design-system/styles/dist/css/styles/tokens.css", "src/styles.css"]
+```
+
+or at the top of `src/styles.css`:
+
+```css
+@import '@tmna-cx-design-system/styles/tokens.css';
+```
+
+Then import the standalone components where you use them:
+
+```ts
+import { Component } from '@angular/core';
+import { LdsButton } from '@tmna-cx-design-system/angular';
+
+@Component({
+  selector: 'app-hero',
+  imports: [LdsButton],
+  template: `<lds-button variant="secondary" (click)="learnMore()">Learn more</lds-button>`,
+})
+export class Hero {
+  learnMore() {}
+}
+```
+
+`LDS_COMPONENTS` imports all of them at once: `imports: [...LDS_COMPONENTS]`.
+
+Inputs are typed (`variant`, `size`, ...) and checked by `strictTemplates`. The element is
+registered the first time a wrapper is created; no `CUSTOM_ELEMENTS_SCHEMA` is needed.
+
+`<lds-button type="submit">` inside a `<form>` submits it like a native button: `(submit)` fires,
+and so does `(ngSubmit)` when the form uses Angular forms.

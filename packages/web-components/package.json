@@ -13,12 +13,14 @@
   "files": [
     "dist",
     "loader",
-    "components"
+    "components",
+    "register"
   ],
   "sideEffects": [
     "./dist/lds/*",
     "./loader/*",
-    "./components/*.js"
+    "./components/*.js",
+    "./register/index.js"
   ],
   "exports": {
     ".": {
@@ -41,6 +43,13 @@
       "types": "./components/*.d.ts",
       "import": "./components/*.js"
     },
+    "./register": {
+      "types": "./register/index.d.ts",
+      "import": "./register/index.js"
+    },
+    "./jsx": {
+      "types": "./dist/jsx/index.d.ts"
+    },
     "./docs.json": "./dist/docs.json",
     "./custom-elements.json": "./dist/custom-elements.json",
     "./package.json": "./package.json"
@@ -56,6 +65,7 @@
     "@storybook/web-components-vite": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
+    "@wc-toolkit/jsx-types": "catalog:",
     "lit": "catalog:",
     "playwright": "catalog:",
     "storybook": "catalog:",
@@ -73,7 +83,8 @@
           "cwd": "{projectRoot}",
           "commands": [
             "node -e \"for (const d of ['../react/src/generated', '../angular/src/generated']) require('node:fs').rmSync(d, { recursive: true, force: true })\"",
-            "stencil build"
+            "stencil build",
+            "node scripts/jsx-types.mjs"
           ],
           "parallel": false
         },

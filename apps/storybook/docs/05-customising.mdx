@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/Customising" />
+
+# Customising
+
+Most changes should not happen in your app. Use the first option that fits:
+
+1. **A prop or variant.** `variant`, `size` and friends cover the designs in Figma. Missing one? Ask
+   the LDS team; a new variant helps every site.
+2. **Slots.** Put your own content (text, icons, links) in the component's slots.
+3. **Tokens.** Colours, spacing, type and radius come from `--lds-*` variables. A brand or theme
+   change is a token change in the styling repo (lxc-lds-style), never a local override.
+4. **CSS parts, for rare site-level fixes.** Each component's Docs page lists its parts. Style them
+   with `::part()` and token variables only:
+
+```css
+.legal-footer lds-button::part(control) {
+  padding-inline: var(--lds-spacing-3);
+}
+```
+
+## Not supported
+
+- Selecting elements or classes inside a component's shadow DOM. They change without notice.
+- Overriding `--lds-*` variables on a page or component to fake a different design.
+- Copying a component's markup or CSS into your app. Use the component or the CSS classes.
+
+Anything you do with `::part()` should be reported to the LDS team, so it becomes a variant instead.

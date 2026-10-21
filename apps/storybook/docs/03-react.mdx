@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/React" />
+
+# React
+
+## Wrappers (React 18 and 19)
+
+```tsx
+// once, at the app entry
+import '@tmna-cx-design-system/styles/tokens.css';
+
+import { LdsButton } from '@tmna-cx-design-system/react';
+
+export function Hero() {
+  return (
+    <LdsButton variant="secondary" onClick={() => track('learn-more')}>
+      Learn more
+    </LdsButton>
+  );
+}
+```
+
+The wrappers are generated from the web components, so their props always match. They register the
+element they render; nothing else to set up.
+
+## The elements directly (React 19)
+
+React 19 renders custom elements natively. Import `register` once and add the shipped JSX types to get
+autocomplete and errors for wrong values:
+
+```tsx
+import '@tmna-cx-design-system/web-components/register';
+import type {} from '@tmna-cx-design-system/web-components/jsx';
+
+<lds-button variant="secondary">Learn more</lds-button>; // OK
+<lds-button variant="blue">Learn more</lds-button>; // type error: not a variant
+```
+
+Prefer the wrappers when you need React 18 support or React-style event props.
+
+## Apps that use Panda CSS themselves
+
+Point your `panda.config.ts` at the LDS styles package to get the same tokens and recipes in your own
+`css()` calls:
+
+```ts
+import { defineConfig } from '@pandacss/dev';
+
+export default defineConfig({
+  designSystem: '@tmna-cx-design-system/styles',
+  include: ['./src/**/*.{ts,tsx}'],
+  outdir: 'styled-system',
+});
+```
+
+Then `import { button } from '../styled-system/recipes'` gives the same classes the components use.
+
+## Server rendering
+
+Components render in the browser. With Next.js or another SSR framework, render them inside client
+components; the HTML they produce on the server is the bare tag, upgraded when the script loads.

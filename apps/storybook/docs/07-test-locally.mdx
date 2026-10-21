@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Guides/Test locally" />
+
+# Test locally
+
+Try an LDS change in a real app before it is released.
+
+## Inside the LDS repo
+
+The example apps use the packages straight from the workspace:
+
+```bash
+pnpm nx serve html-example      # http://localhost:4300
+pnpm nx serve react-example     # http://localhost:4301
+pnpm nx serve angular-example   # http://localhost:4302
+pnpm nx test react-example      # production build + browser smoke test
+```
+
+## In your own app
+
+Pack every package exactly as it would be published:
+
+```bash
+pnpm nx run-many -t build
+pnpm pack:local
+```
+
+This writes the tarballs to `dist/local-packs/` and prints an `overrides` block. Paste it into your
+app's `package.json` (`"overrides"` for npm, `"pnpm": { "overrides": … }` for pnpm), set the LDS
+dependencies to the same `file:` paths, and reinstall. Every LDS package, including the ones your app
+only gets indirectly, then comes from your local build.
+
+Undo it by removing the overrides and reinstalling.

@@ -1,0 +1,19 @@
+{
+  "name": "@lds/smoke-test",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Opens an example app's production build in Chromium and checks LDS renders and works",
+  "type": "module",
+  "bin": {
+    "lds-smoke": "./smoke.mjs"
+  },
+  "dependencies": {
+    "playwright": "catalog:",
+    "vite": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:tool"
+    ]
+  }
+}

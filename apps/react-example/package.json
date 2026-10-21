@@ -1,0 +1,63 @@
+{
+  "name": "@lds/react-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "React 19 app consuming LDS: the generated wrappers and the custom elements with typed JSX",
+  "type": "module",
+  "dependencies": {
+    "@tmna-cx-design-system/react": "workspace:*",
+    "@tmna-cx-design-system/styles": "workspace:*",
+    "@tmna-cx-design-system/web-components": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@lds/smoke-test": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "vite": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:app"
+    ],
+    "targets": {
+      "serve": {
+        "command": "vite --port 4301",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "continuous": true
+      },
+      "build": {
+        "command": "vite build",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "outputs": [
+          "{projectRoot}/dist"
+        ]
+      },
+      "test": {
+        "command": "lds-smoke dist",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "inputs": [
+          "default",
+          "^production"
+        ],
+        "outputs": []
+      },
+      "stylelint": {}
+    }
+  }
+}

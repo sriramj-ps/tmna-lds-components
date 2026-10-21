@@ -19,8 +19,14 @@ ships them three ways: web components (HTML/AEM), React wrappers and Angular wra
 | `@tmna-cx-design-system/react`          | `packages/react`          | Generated React wrappers. Never hand-written.                                     |
 | `@tmna-cx-design-system/angular`        | `packages/angular`        | Generated Angular standalone wrappers. Never hand-written.                        |
 | `@lds/storybook`                        | `apps/storybook`          | Docs + story tests (a11y gated)                                                   |
-| `@lds/html-example`                     | `apps/html-example`       | Plain HTML page using the web components and the CSS-only recipe classes          |
+| `@lds/html-example`                     | `apps/html-example`       | Plain HTML page: `register` import + the CSS-only recipe classes                  |
+| `@lds/react-example`                    | `apps/react-example`      | React 19 app: generated wrappers + the elements with the shipped JSX types        |
+| `@lds/angular-example`                  | `apps/angular-example`    | Angular app: generated standalone wrappers                                        |
 | `@lds/generators`                       | `tools/generators`        | `nx g @lds/generators:component <name>` (creates the component AND its recipe)    |
+| `@lds/smoke-test`                       | `tools/smoke-test`        | `lds-smoke`: opens an example's production build in Chromium and checks LDS works |
+
+Consumer docs (Storybook "Guides" pages, published by `.github/workflows/docs.yml`) live in
+`apps/storybook/docs/`. Shared prompts for Copilot and Slingshot live in `.github/prompts/`.
 
 `vendor/` holds the TMNA preset as a tarball until the styling repo publishes it to JFrog.
 
@@ -43,7 +49,8 @@ ships them three ways: web components (HTML/AEM), React wrappers and Angular wra
 4. **Never create tokens in this repo.** Missing a colour, size or font? Ask for it in the styling repo (lxc-lds-style), then bump `@tmna/panda-preset-base`. `@pandacss/dev` must stay on exactly the version the preset's peer dependency names.
 5. **Layers only import downward:** styles ← core components ← organisms; wrappers import only web components. `@nx/enforce-module-boundaries` fails otherwise.
 6. **Every component ships with:** its recipe, JSDoc on the class and every `@Prop`/`@Event`/slot/part, a `*.stories.ts` with a `play()` test, and a `*.visual.test.ts`. Prop unions must match the recipe variants (the generator adds a compile-time check). Accessibility violations fail tests.
-7. **Public API changes are deliberate.** Removing or renaming a prop, event, slot, part, recipe or recipe variant (HTML-only pages use the class names `lds-<recipe>--<variant>_<value>`) is a breaking change: create a major version plan (`pnpm nx release plan major`) and explain the migration.
+7. **Consumers are tested like consumers.** Each example app's `test` target builds it for production and runs `lds-smoke` on it. A change to how apps install or load LDS (exports, `register`, `jsx` types, CSS files) must keep all three examples passing and update the Storybook guides.
+8. **Public API changes are deliberate.** Removing or renaming a prop, event, slot, part, recipe or recipe variant (HTML-only pages use the class names `lds-<recipe>--<variant>_<value>`) is a breaking change: create a major version plan (`pnpm nx release plan major`) and explain the migration.
 
 Brands: Toyota/Lexus switching arrives when the styling repo ships Panda themes (`data-panda-theme`). Until then, no brand-specific CSS in components.
 
@@ -55,6 +62,9 @@ pnpm nx g @lds/generators:component <name>     # new component + recipe (name wi
 pnpm nx build web-components                   # builds styles first; also regenerates React/Angular wrappers
 pnpm nx storybook storybook                    # http://localhost:6006
 pnpm nx serve html-example                     # http://localhost:4300, plain HTML consumer
+pnpm nx serve react-example                    # http://localhost:4301
+pnpm nx serve angular-example                  # http://localhost:4302 (Node 24, see .nvmrc)
+pnpm pack:local                                # tarballs in dist/local-packs/ to try LDS in another app
 pnpm nx run-many -t lint stylelint typecheck test
 pnpm nx affected -t lint stylelint typecheck test build   # what CI runs
 pnpm nx test web-components -- -u              # accept intended visual changes
@@ -67,6 +77,7 @@ pnpm nx release plan <patch|minor|major>       # record a change for the next re
 - [ ] Styles only in the recipe, tokens only; keyboard accessible, visible focus
 - [ ] `pnpm nx affected -t lint stylelint typecheck test build` passes locally
 - [ ] Screenshot references updated only for intended visual changes
+- [ ] Storybook guides (`apps/storybook/docs/`) updated if consumers need to do anything differently
 - [ ] Version plan added if the change should be released
 
 # General Guidelines for working with Nx

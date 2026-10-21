@@ -1,0 +1,62 @@
+name: Docs
+
+# Publishes Storybook (component docs + the usage guides) on every merge to main, so consuming
+# teams always have a current docs URL.
+#
+# Host: GitHub Pages. One-time setup: Settings > Pages > Source = "GitHub Actions". For a private
+# repo, Pages needs GitHub Enterprise Cloud; set Pages visibility to private so only org members see
+# it. Using another host (S3/CloudFront, Azure Static Web Apps, Chromatic)? Keep the build job and
+# replace the deploy job with that host's upload step; the site is apps/storybook/dist.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: docs
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    env:
+      LEFTHOOK: 0
+      NX_NO_CLOUD: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # version comes from "packageManager" in package.json
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Storybook (builds styles and web components first)
+        run: pnpm nx build-storybook storybook
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: apps/storybook/dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
