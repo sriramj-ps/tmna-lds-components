@@ -1,0 +1,124 @@
+{
+  "name": "@tmna-cx-design-system/styles",
+  "version": "0.0.0",
+  "description": "LDS styles built with Panda CSS on top of @tmna/panda-preset-base: tokens, component recipes, plain CSS and a Panda design-system package",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist",
+    "styled-system",
+    "src"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/css/styles/tokens.css",
+    "./recipe-css/*.css": "./dist/css/styles/recipes/*.css",
+    "./package.json": "./package.json",
+    "./panda/*": "./dist/panda/*",
+    "./css": {
+      "types": "./styled-system/css/index.d.ts",
+      "default": "./styled-system/css/index.js"
+    },
+    "./css/*": {
+      "types": "./styled-system/css/*.d.ts",
+      "default": "./styled-system/css/*.js"
+    },
+    "./recipes": {
+      "types": "./styled-system/recipes/index.d.ts",
+      "default": "./styled-system/recipes/index.js"
+    },
+    "./recipes/*": {
+      "types": "./styled-system/recipes/*.d.ts",
+      "default": "./styled-system/recipes/*.js"
+    },
+    "./patterns": {
+      "types": "./styled-system/patterns/index.d.ts",
+      "default": "./styled-system/patterns/index.js"
+    },
+    "./patterns/*": {
+      "types": "./styled-system/patterns/*.d.ts",
+      "default": "./styled-system/patterns/*.js"
+    },
+    "./tokens": {
+      "types": "./styled-system/tokens/index.d.ts",
+      "default": "./styled-system/tokens/index.js"
+    },
+    "./helpers": {
+      "types": "./styled-system/helpers.d.ts",
+      "default": "./styled-system/helpers.js"
+    },
+    "./types": {
+      "types": "./styled-system/types/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "@pandacss/dev": "^2.2.0",
+    "@pandacss/preset-base": "^2.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@pandacss/dev": {
+      "optional": true
+    },
+    "@pandacss/preset-base": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@pandacss/dev": "catalog:",
+    "@pandacss/preset-base": "catalog:",
+    "@tmna/panda-preset-base": "file:../../vendor/tmna-panda-preset-base-0.0.0.tgz",
+    "typescript": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:styles"
+    ],
+    "targets": {
+      "build": {
+        "executor": "nx:run-commands",
+        "options": {
+          "cwd": "{projectRoot}",
+          "commands": [
+            "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+            "panda codegen --clean",
+            "panda cssgen --splitting --outdir dist/css",
+            "panda cssgen --outfile dist/styles.css",
+            "panda lib --spec"
+          ],
+          "parallel": false
+        },
+        "inputs": [
+          "{projectRoot}/src/**/*",
+          "{projectRoot}/panda.config.ts",
+          "{projectRoot}/package.json",
+          "{workspaceRoot}/vendor/*.tgz"
+        ],
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/styled-system"
+        ],
+        "cache": true
+      },
+      "typecheck": {
+        "command": "tsc -p tsconfig.json --noEmit",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/**/*",
+          "{projectRoot}/panda.config.ts",
+          "{projectRoot}/tsconfig.json"
+        ],
+        "outputs": []
+      },
+      "publint": {}
+    }
+  }
+}

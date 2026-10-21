@@ -2,7 +2,13 @@
 export default {
   extends: ['stylelint-config-standard'],
   plugins: ['stylelint-declaration-strict-value'],
-  ignoreFiles: ['**/dist/**', '**/www/**', '**/node_modules/**', '**/src/generated/**'],
+  ignoreFiles: [
+    '**/dist/**',
+    '**/www/**',
+    '**/node_modules/**',
+    '**/src/generated/**',
+    '**/styled-system/**',
+  ],
   rules: {
     // Design-system rule: colours, type and spacing MUST come from tokens (var(--lds-...))
     'scale-unlimited/declaration-strict-value': [
@@ -59,7 +65,7 @@ export default {
       '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',
       { message: 'Use kebab-case BEM: block, block__element, block--modifier' },
     ],
-    // @import './x.css' (bundled by Lightning CSS)
+    // @import '~@tmna-cx-design-system/styles/...css' (inlined by Stencil)
     'import-notation': 'string',
     // Our custom-property naming: --lds-<group>-<name>
     'custom-property-pattern': [

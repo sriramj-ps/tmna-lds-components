@@ -9,14 +9,14 @@ Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `hr
 
 ## Properties
 
-| Property   | Attribute  | Description                                                | Type                              | Default     |
-| ---------- | ---------- | ---------------------------------------------------------- | --------------------------------- | ----------- |
-| `disabled` | `disabled` | Disables the button. Ignored when `href` is set.           | `boolean`                         | `false`     |
-| `href`     | `href`     | When set, renders a link instead of a button.              | `string \| undefined`             | `undefined` |
-| `size`     | `size`     | Size of the button.                                        | `"lg" \| "md" \| "sm"`            | `'md'`      |
-| `target`   | `target`   | Link target, e.g. `_blank`. Only used with `href`.         | `string \| undefined`             | `undefined` |
-| `type`     | `type`     | Native button type. `submit` submits the surrounding form. | `"button" \| "reset" \| "submit"` | `'button'`  |
-| `variant`  | `variant`  | Visual style. Values come from the brand's tokens.         | `"primary" \| "secondary"`        | `'primary'` |
+| Property   | Attribute  | Description                                                 | Type                              | Default     |
+| ---------- | ---------- | ----------------------------------------------------------- | --------------------------------- | ----------- |
+| `disabled` | `disabled` | Disables the button. Ignored when `href` is set.            | `boolean`                         | `false`     |
+| `href`     | `href`     | When set, renders a link instead of a button.               | `string \| undefined`             | `undefined` |
+| `size`     | `size`     | Size of the button.                                         | `"lg" \| "md" \| "sm"`            | `'md'`      |
+| `target`   | `target`   | Link target, e.g. `_blank`. Only used with `href`.          | `string \| undefined`             | `undefined` |
+| `type`     | `type`     | Native button type. `submit` submits the surrounding form.  | `"button" \| "reset" \| "submit"` | `'button'`  |
+| `variant`  | `variant`  | Visual style: `primary` (filled) or `secondary` (outlined). | `"primary" \| "secondary"`        | `'primary'` |
 
 
 ## Slots

@@ -1,9 +1,10 @@
 import type { Preview } from '@storybook/web-components-vite';
 import { setCustomElementsManifest } from '@storybook/web-components-vite';
 
-// Same CSS a real site loads: tokens (both brands) + foundation
-import '@tmna-cx-design-system/tokens/css';
-import '@tmna-cx-design-system/foundation';
+// Same CSS a real site loads. styles.css = the design tokens (--lds-* variables) from the
+// lxc-lds-style preset + every LDS recipe as plain classes (for the "CSS only" stories).
+// A site that only uses <lds-*> elements can load the smaller tokens.css instead.
+import '@tmna-cx-design-system/styles/styles.css';
 // Register every component from the bundler-friendly build. (The lazy `loader/` is for AEM pages
 // that load scripts directly; it doesn't survive being re-bundled by Vite.)
 import * as components from '@tmna-cx-design-system/web-components/components';
@@ -16,28 +17,8 @@ for (const [name, define] of Object.entries(components)) {
 }
 
 const preview: Preview = {
-  // Toolbar switch: Toyota / Lexus. Sets <html data-brand="..."> exactly like the sites do.
-  globalTypes: {
-    brand: {
-      description: 'Brand tokens',
-      toolbar: {
-        title: 'Brand',
-        icon: 'paintbrush',
-        items: [
-          { value: 'toyota', title: 'Toyota' },
-          { value: 'lexus', title: 'Lexus' },
-        ],
-        dynamicTitle: true,
-      },
-    },
-  },
-  initialGlobals: { brand: 'toyota' },
-  decorators: [
-    (story, context) => {
-      document.documentElement.dataset.brand = context.globals.brand as string;
-      return story();
-    },
-  ],
+  // A Toyota / Lexus toolbar comes back once the styling repo ships brand themes
+  // (Panda `themes`, switched with <html data-panda-theme="...">).
   parameters: {
     // Accessibility violations FAIL story tests (use 'todo' per story while fixing)
     a11y: { test: 'error' },

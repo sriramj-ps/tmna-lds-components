@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LDS in plain HTML</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <main class="page">
+      <h1>LDS in plain HTML</h1>
+      <p>
+        Everything on this page comes from two packages:
+        <code>@tmna-cx-design-system/styles</code> (tokens from the lxc-lds-style preset and the LDS
+        recipes) and <code>@tmna-cx-design-system/web-components</code>.
+      </p>
+
+      <section class="example" aria-labelledby="wc-heading">
+        <h2 id="wc-heading">1. Web components (recommended)</h2>
+        <p>Look and behaviour: keyboard, focus, forms, links. Needs the component script.</p>
+        <div class="row">
+          <lds-button>Build &amp; Price</lds-button>
+          <lds-button variant="secondary">Learn more</lds-button>
+          <lds-button size="sm">Small</lds-button>
+          <lds-button size="lg">Large</lds-button>
+          <lds-button href="#offers">Offers (link)</lds-button>
+          <lds-button disabled>Disabled</lds-button>
+        </div>
+        <form class="row" id="quote-form">
+          <label>ZIP code <input name="zip" value="75024" inputmode="numeric" /></label>
+          <lds-button type="submit">Get a quote</lds-button>
+          <output id="quote-result" for="quote-form"></output>
+        </form>
+      </section>
+
+      <section class="example" aria-labelledby="css-heading">
+        <h2 id="css-heading">2. CSS classes only (no JavaScript)</h2>
+        <p>
+          The same <code>button</code> recipe as plain classes from <code>styles.css</code>. For
+          markup you can't turn into a web component; you handle behaviour yourself.
+        </p>
+        <div class="row">
+          <button class="lds-button lds-button--variant_primary lds-button--size_md" type="button">
+            Build &amp; Price
+          </button>
+          <a class="lds-button lds-button--variant_secondary lds-button--size_md" href="#learn">
+            Learn more
+          </a>
+          <button class="lds-button lds-button--variant_primary lds-button--size_sm" type="button">
+            Small
+          </button>
+          <button class="lds-button lds-button--variant_primary lds-button--size_lg" type="button">
+            Large
+          </button>
+          <button
+            class="lds-button lds-button--variant_primary lds-button--size_md"
+            type="button"
+            disabled
+          >
+            Disabled
+          </button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

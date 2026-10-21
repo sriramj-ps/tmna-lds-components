@@ -3,8 +3,9 @@
 
 *                         @YOUR-ORG/lds-core
 
-# Tokens change both brands at once: design system designers review too
-/packages/tokens/         @YOUR-ORG/lds-core @YOUR-ORG/lds-design
+# Recipes define how every component looks (also as HTML classes): designers review too
+/packages/styles/         @YOUR-ORG/lds-core @YOUR-ORG/lds-design
+/vendor/                  @YOUR-ORG/lds-core @YOUR-ORG/lds-design
 
 # Build, release and supply-chain settings: platform owners only
 /.github/                 @YOUR-ORG/lds-platform

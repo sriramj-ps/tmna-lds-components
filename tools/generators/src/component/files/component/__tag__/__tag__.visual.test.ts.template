@@ -1,0 +1,20 @@
+import { page } from 'vitest/browser';
+import { beforeAll, expect, test } from 'vitest';
+// Only the token variables: the component brings its own recipe CSS into its shadow root
+import '@tmna-cx-design-system/styles/tokens.css';
+import { defineCustomElement } from '../../../components/<%= tag %>.js';
+
+beforeAll(() => defineCustomElement());
+
+test('<%= tag %> looks right', async () => {
+  document.body.innerHTML = `
+    <div data-testid="stage" style="display:inline-block;padding:8px">
+      <<%= tag %>>Default</<%= tag %>>
+      <<%= tag %> variant="subtle">Subtle</<%= tag %>>
+    </div>`;
+  await customElements.whenDefined('<%= tag %>');
+  for (const host of Array.from(document.querySelectorAll('<%= tag %>'))) {
+    await expect.poll(() => host.shadowRoot?.querySelector('[part="container"]')).toBeTruthy();
+  }
+  await expect.element(page.getByTestId('stage')).toMatchScreenshot('<%= tag %>');
+});

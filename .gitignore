@@ -56,3 +56,4 @@ storybook-static
 *.tsbuildinfo
 apps/storybook/dist
 .vitest
+packages/styles/styled-system

@@ -20,7 +20,7 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": ["packages/web-components/**", "packages/angular/**"]
+      "exclude": ["packages/web-components/**", "packages/angular/**", "packages/styles/**"]
     },
     {
       "plugin": "@nx/eslint/plugin",

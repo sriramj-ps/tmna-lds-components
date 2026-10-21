@@ -1,0 +1,29 @@
+import { defineRecipe } from '../define-recipe';
+
+/**
+ * <%= description %>
+ *
+ * Used by the `<%= tag %>` web component (inside its shadow DOM) and directly as CSS classes
+ * on plain HTML pages: `class="lds-<%= name %> lds-<%= name %>--variant_subtle"`.
+ *
+ * Tokens only: every value is checked against the lxc-lds-style preset by `nx typecheck styles`.
+ */
+export const <%= recipeName %> = defineRecipe({
+  className: '<%= name %>',
+  description: '<%= description %>',
+  base: {
+    display: 'block',
+    paddingInline: '4',
+    paddingBlock: '4',
+    fontFamily: 'sans',
+    color: 'black',
+    backgroundColor: 'white',
+  },
+  variants: {
+    variant: {
+      default: {},
+      subtle: { borderWidth: '1', borderStyle: 'solid', borderColor: 'black' },
+    },
+  },
+  defaultVariants: { variant: 'default' },
+});

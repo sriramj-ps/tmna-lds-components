@@ -1,7 +1,18 @@
 import { AttachInternals, Component, Element, Host, Prop, h } from '@stencil/core';
+import {
+  button,
+  type ButtonVariant as RecipeVariants,
+} from '@tmna-cx-design-system/styles/recipes';
 
 export type ButtonVariant = 'primary' | 'secondary';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+
+// Compile-time guard: these unions must stay identical to the recipe's variants.
+type Same<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false;
+const variantsMatch: Same<ButtonVariant, NonNullable<RecipeVariants['variant']>> = true;
+const sizesMatch: Same<ButtonSize, NonNullable<RecipeVariants['size']>> = true;
+void variantsMatch;
+void sizesMatch;
 
 /**
  * Primary call-to-action button. Renders a native `<button>`, or an `<a>` when `href` is set.
@@ -19,7 +30,7 @@ export class LdsButton {
   @Element() el!: HTMLElement;
   @AttachInternals() internals!: ElementInternals;
 
-  /** Visual style. Values come from the brand's tokens. */
+  /** Visual style: `primary` (filled) or `secondary` (outlined). */
   @Prop({ reflect: true }) variant: ButtonVariant = 'primary';
 
   /** Size of the button. */
@@ -51,11 +62,8 @@ export class LdsButton {
   };
 
   render() {
-    const classes = {
-      control: true,
-      [`control--${this.variant}`]: true,
-      [`control--${this.size}`]: true,
-    };
+    // e.g. "lds-button lds-button--variant_primary lds-button--size_md"
+    const classes = button({ variant: this.variant, size: this.size });
     return (
       <Host onClick={this.handleClick}>
         {this.href ? (

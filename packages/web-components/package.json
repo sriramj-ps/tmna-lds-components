@@ -47,7 +47,7 @@
   },
   "customElements": "./dist/custom-elements.json",
   "peerDependencies": {
-    "@tmna-cx-design-system/tokens": "workspace:^"
+    "@tmna-cx-design-system/styles": "workspace:^"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "catalog:",

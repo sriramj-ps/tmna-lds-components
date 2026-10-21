@@ -17,6 +17,8 @@ export default [
       '**/src/generated/**',
       '**/vite.config.*.timestamp*',
       '**/.stencil',
+      // Panda codegen output (packages/styles)
+      '**/styled-system',
       'packages/web-components/components',
     ],
   },
@@ -30,23 +32,18 @@ export default [
           allow: [],
           // Who may import whom. Lower layers never import higher ones.
           depConstraints: [
-            { sourceTag: 'type:tokens', onlyDependOnLibsWithTags: [] },
-            { sourceTag: 'type:foundation', onlyDependOnLibsWithTags: ['type:tokens'] },
+            // Recipes + the TMNA Panda preset (lxc-lds-style). The bottom layer.
+            { sourceTag: 'type:styles', onlyDependOnLibsWithTags: [] },
             {
               sourceTag: 'level:core',
-              onlyDependOnLibsWithTags: ['type:tokens', 'type:foundation', 'type:icons'],
+              onlyDependOnLibsWithTags: ['type:styles', 'type:icons'],
             },
             {
               sourceTag: 'level:organism',
-              onlyDependOnLibsWithTags: [
-                'level:core',
-                'type:tokens',
-                'type:foundation',
-                'type:icons',
-              ],
+              onlyDependOnLibsWithTags: ['level:core', 'type:styles', 'type:icons'],
             },
             { sourceTag: 'type:wrapper', onlyDependOnLibsWithTags: ['type:components'] },
-            { sourceTag: 'type:tool', onlyDependOnLibsWithTags: ['type:tool', 'type:tokens'] },
+            { sourceTag: 'type:tool', onlyDependOnLibsWithTags: ['type:tool', 'type:styles'] },
             { sourceTag: 'type:app', onlyDependOnLibsWithTags: ['*'] },
           ],
         },

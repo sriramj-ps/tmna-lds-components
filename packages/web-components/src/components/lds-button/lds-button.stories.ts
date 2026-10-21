@@ -41,7 +41,7 @@ async function control(canvasElement: HTMLElement) {
   };
   await customElements.whenDefined('lds-button');
   await host.componentOnReady?.();
-  const inner = host.shadowRoot?.querySelector<HTMLElement>('.control');
+  const inner = host.shadowRoot?.querySelector<HTMLElement>('[part="control"]');
   if (!inner) throw new Error('lds-button did not render its control');
   return inner;
 }
@@ -84,22 +84,34 @@ export const AsLink: Story = {
   },
 };
 
-/** Both brands side by side: same component, different tokens. */
-export const BothBrands: Story = {
+/**
+ * The same recipe as plain CSS classes, for pages that can't run JavaScript (or for
+ * markup rendered by another framework). Needs `@tmna-cx-design-system/styles/styles.css`.
+ * Prefer `<lds-button>`: it adds keyboard, form and link behaviour on top of the look.
+ */
+export const CssOnly: Story = {
   render: () => html`
-    <div style="display:flex;gap:32px">
-      <div data-brand="toyota"><lds-button>Toyota</lds-button></div>
-      <div data-brand="lexus"><lds-button>Lexus</lds-button></div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <button class="lds-button lds-button--variant_primary lds-button--size_md">Primary</button>
+      <a class="lds-button lds-button--variant_secondary lds-button--size_md" href="#learn-more"
+        >Secondary link</a
+      >
     </div>
   `,
   play: async ({ canvasElement }) => {
-    const [toyota, lexus] = Array.from(canvasElement.querySelectorAll('lds-button'));
-    await customElements.whenDefined('lds-button');
-    const bg = (el: Element) => {
-      const inner = el.shadowRoot?.querySelector('.control');
-      return inner ? getComputedStyle(inner).backgroundColor : '';
-    };
-    await expect(bg(toyota)).not.toBe(bg(lexus));
+    const [cssButton] = Array.from(canvasElement.querySelectorAll('button'));
+    const host = document.createElement('lds-button');
+    host.textContent = 'Web component';
+    canvasElement.append(host);
+    const inner = await control(canvasElement);
+    // The class-only button and the web component must look identical
+    await expect(getComputedStyle(cssButton).backgroundColor).toBe(
+      getComputedStyle(inner).backgroundColor,
+    );
+    await expect(getComputedStyle(cssButton).paddingInlineStart).toBe(
+      getComputedStyle(inner).paddingInlineStart,
+    );
+    host.remove();
   },
 };
 

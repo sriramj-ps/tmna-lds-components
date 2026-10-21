@@ -21,6 +21,7 @@ minimumReleaseAge: 1440
 # Our own packages are exempt so a fresh release can be consumed right away
 minimumReleaseAgeExclude:
   - '@tmna-cx-design-system/*'
+  - '@tmna/*'
   - '@tmna-cx-ds-organisms/*'
 # Refuse a new version if its publish trust level dropped (e.g. lost provenance)
 trustPolicy: no-downgrade
@@ -43,8 +44,9 @@ catalog:
   prettier: ^3.9.10
   '@swc/helpers': ~0.5.18
   typescript: ~6.0.3
-  style-dictionary: ^5.6.1
-  lightningcss: ^1.33.0
+  # Panda must match the peer version pinned by @tmna/panda-preset-base exactly
+  '@pandacss/dev': 2.2.0
+  '@pandacss/preset-base': 2.2.0
   '@stencil/core': ^4.45.2
   '@stencil/react-output-target': ^1.6.5
   '@stencil/angular-output-target': ^1.5.2
@@ -72,7 +74,6 @@ catalog:
   playwright: ^1.64.0
   publint: ^0.3.25
   '@types/node': ^24.0.0
-  browserslist: ^4.28.1
   tslib: ^2.8.1
   '@nx/eslint': 23.3.0
   '@commitlint/cli': ^21.2.3

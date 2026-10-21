@@ -19,7 +19,7 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const host = canvasElement.querySelector('<%= tag %>');
     await customElements.whenDefined('<%= tag %>');
-    await expect(host?.shadowRoot?.querySelector('.container')).toBeTruthy();
+    await expect(host?.shadowRoot?.querySelector('[part="container"]')).toBeTruthy();
   },
 };
 

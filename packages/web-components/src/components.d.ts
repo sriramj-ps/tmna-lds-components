@@ -36,7 +36,7 @@ export namespace Components {
          */
         "type": 'button' | 'submit' | 'reset';
         /**
-          * Visual style. Values come from the brand's tokens.
+          * Visual style: `primary` (filled) or `secondary` (outlined).
           * @default 'primary'
          */
         "variant": ButtonVariant;
@@ -93,7 +93,7 @@ declare namespace LocalJSX {
          */
         "type"?: 'button' | 'submit' | 'reset';
         /**
-          * Visual style. Values come from the brand's tokens.
+          * Visual style: `primary` (filled) or `secondary` (outlined).
           * @default 'primary'
          */
         "variant"?: ButtonVariant;

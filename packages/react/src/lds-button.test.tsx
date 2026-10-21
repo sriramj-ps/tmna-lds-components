@@ -27,6 +27,10 @@ test('LdsButton passes props to <lds-button> and forwards clicks', async () => {
   expect(host?.getAttribute('variant')).toBe('secondary');
   expect(host?.getAttribute('size')).toBe('lg');
   expect(host?.textContent).toBe('Build & Price');
+  // Styled by the Panda `button` recipe from @tmna-cx-design-system/styles
+  const classes = host?.shadowRoot?.querySelector('button')?.classList;
+  expect(classes?.contains('lds-button--variant_secondary')).toBe(true);
+  expect(classes?.contains('lds-button--size_lg')).toBe(true);
 
   host?.shadowRoot?.querySelector('button')?.click();
   expect(clicks).toBe(1);

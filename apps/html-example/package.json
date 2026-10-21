@@ -1,0 +1,49 @@
+{
+  "name": "@lds/html-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Plain HTML page consuming LDS: <lds-*> web components and the recipe CSS classes",
+  "type": "module",
+  "devDependencies": {
+    "@tmna-cx-design-system/styles": "workspace:*",
+    "@tmna-cx-design-system/web-components": "workspace:*",
+    "vite": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "type:app"
+    ],
+    "targets": {
+      "serve": {
+        "command": "vite --port 4300",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "^build"
+        ],
+        "continuous": true
+      },
+      "build": {
+        "command": "vite build",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "outputs": [
+          "{projectRoot}/dist"
+        ]
+      },
+      "preview": {
+        "command": "vite preview --port 4300",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "dependsOn": [
+          "build"
+        ],
+        "continuous": true
+      },
+      "stylelint": {}
+    }
+  }
+}

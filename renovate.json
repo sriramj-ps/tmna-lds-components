@@ -19,10 +19,28 @@
       "groupName": "playwright",
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"]
     },
-    { "groupName": "storybook", "matchPackageNames": ["storybook", "@storybook/**"] },
-    { "groupName": "angular", "matchPackageNames": ["@angular/**", "ng-packagr"] },
-    { "groupName": "stencil", "matchPackageNames": ["@stencil/**"] },
-    { "groupName": "vitest", "matchPackageNames": ["vitest", "@vitest/**"] },
+    {
+      "description": "Panda must equal the exact version @tmna/panda-preset-base peers on: update the preset (styling repo) and Panda together",
+      "groupName": "panda",
+      "matchPackageNames": ["@pandacss/**", "@tmna/panda-preset-base"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "groupName": "storybook",
+      "matchPackageNames": ["storybook", "@storybook/**"]
+    },
+    {
+      "groupName": "angular",
+      "matchPackageNames": ["@angular/**", "ng-packagr"]
+    },
+    {
+      "groupName": "stencil",
+      "matchPackageNames": ["@stencil/**"]
+    },
+    {
+      "groupName": "vitest",
+      "matchPackageNames": ["vitest", "@vitest/**"]
+    },
     {
       "groupName": "lint",
       "matchPackageNames": [

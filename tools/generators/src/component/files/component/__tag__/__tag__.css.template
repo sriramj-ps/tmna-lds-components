@@ -1,0 +1,10 @@
+/*
+ * The look comes from the Panda `<%= recipeName %>` recipe in packages/styles/src/recipes/<%= name %>.ts.
+ * Change styles THERE (tokens only), not here: plain-HTML pages use the same recipe classes.
+ * This file only pulls the recipe CSS into the shadow root and sets host-level layout.
+ */
+@import '~@tmna-cx-design-system/styles/dist/css/styles/recipes/<%= name %>.css';
+
+:host {
+  display: block;
+}

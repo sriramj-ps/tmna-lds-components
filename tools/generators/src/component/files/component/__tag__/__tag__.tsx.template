@@ -1,0 +1,35 @@
+import { Component, Host, Prop, h } from '@stencil/core';
+import { <%= recipeName %>, type <%= recipeTypeName %> } from '@tmna-cx-design-system/styles/recipes';
+
+export type <%= className %>Variant = 'default' | 'subtle';
+
+// Compile-time guard: the prop's union must stay identical to the recipe's variants.
+type Same<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false;
+const variantsMatch: Same<<%= className %>Variant, NonNullable<<%= recipeTypeName %>['variant']>> = true;
+void variantsMatch;
+
+/**
+ * <%= description %>
+ *
+ * @slot - Main content
+ * @part container - The outer wrapper, for rare site-level overrides
+ */
+@Component({
+  tag: '<%= tag %>',
+  styleUrl: '<%= tag %>.css',
+  shadow: true,
+})
+export class <%= className %> {
+  /** Visual emphasis (recipe variant `variant`). */
+  @Prop({ reflect: true }) variant: <%= className %>Variant = 'default';
+
+  render() {
+    return (
+      <Host>
+        <div part="container" class={<%= recipeName %>({ variant: this.variant })}>
+          <slot />
+        </div>
+      </Host>
+    );
+  }
+}
